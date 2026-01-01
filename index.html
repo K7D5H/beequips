@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BSS BeeQuip Encyclopedia</title>
+    <style>
+        :root {
+            --blue: #00a2ff;
+            --red: #ff3e3e;
+            --white: #f0f0f0;
+            --gold: #ffcc00;
+            --bg: #0b0e14;
+            --card-bg: #161b22;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
+            color: #e6edf3;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+        }
+
+        .filter-container {
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            background: rgba(11, 14, 20, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn:hover { transform: scale(1.05); }
+        .btn-all { background: #444; color: white; }
+        .btn-blue { background: var(--blue); color: white; }
+        .btn-red { background: var(--red); color: white; }
+        .btn-white { background: var(--white); color: #333; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            border-top: 4px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card.blue { border-top-color: var(--blue); }
+        .card.red { border-top-color: var(--red); }
+        .card.white { border-top-color: var(--white); }
+
+        .name { font-size: 1.3em; font-weight: bold; color: var(--gold); margin-bottom: 10px; }
+        .stats-list { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+        .stats-list li {
+            padding: 6px 0;
+            border-bottom: 1px solid #21262d;
+            font-size: 0.95em;
+        }
+        .stat-val { color: #58a6ff; font-weight: bold; }
+        .red .stat-val { color: #ff7b72; }
+        .white .stat-val { color: #d1d5da; }
+
+        .note { margin-top: 15px; font-size: 0.85em; color: #8b949e; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>BeeQuip Encyclopedia</h1>
+        <p>Seznam všech hlavních BeeQuipů a jejich nejlepších statistik.</p>
+    </header>
+
+    <div class="filter-container">
+        <button class="btn btn-all" onclick="filter('all')">Všechny</button>
+        <button class="btn btn-blue" onclick="filter('blue')">Modré</button>
+        <button class="btn btn-red" onclick="filter('red')">Červené</button>
+        <button class="btn btn-white" onclick="filter('white')">Bílé / Ostatní</button>
+    </div>
+
+    <div class="grid" id="quipGrid">
+        
+        <div class="card blue">
+            <div class="name">Pinecone</div>
+            <ul class="stats-list">
+                <li>Blue Pollen: <span class="stat-val">+15%</span></li>
+                <li>Capacity: <span class="stat-val">+10%</span></li>
+                <li>Pine Forest Pollen: <span class="stat-val">+20%</span></li>
+            </ul>
+            <div class="note">Povinnost pro Blue Hives v Borovici.</div>
+        </div>
+
+        <div class="card blue">
+            <div class="name">Snow Tiara</div>
+            <ul class="stats-list">
+                <li>Blue Pollen: <span class="stat-val">+12%</span></li>
+                <li>Bubble Pollen: <span class="stat-val">+15%</span></li>
+                <li>Capacity: <span class="stat-val">+5%</span></li>
+            </ul>
+        </div>
+
+        <div class="card blue">
+            <div class="name">Bubble Light</div>
+            <ul class="stats-list">
+                <li>Bubble Pollen: <span class="stat-val">+25%</span></li>
+                <li>Blue Bomb Pollen: <span class="stat-val">+20%</span></li>
+                <li>Energy: <span class="stat-val">+10%</span></li>
+            </ul>
+        </div>
+
+        <div class="card blue">
+            <div class="name">Icicles</div>
+            <ul class="stats-list">
+                <li>Blue Bomb Pollen: <span class="stat-val">+20%</span></li>
+                <li>Attack: <span class="stat-val">+1</span></li>
+                <li>Critical Power: <span class="stat-val">+5%</span></li>
+            </ul>
+        </div>
+
+        <div class="card blue">
+            <div class="name">Kazoo</div>
+            <ul class="stats-list">
+                <li>Ability: <span class="stat-val">Melody Token</span></li>
+                <li>Blue Pollen: <span class="stat-val">+5%</span></li>
+                <li>Bee Move Speed: <span class="stat-val">+10%</span></li>
+            </ul>
+            <div class="note">Skvělá alternativa k Toy Horn.</div>
+        </div>
+
+        <div class="card red">
+            <div class="name">Poinsettia</div>
+            <ul class="stats-list">
+                <li>Red Pollen: <span class="stat-val">+15%</span></li>
+                <li>Red Bomb Pollen: <span class="stat-val">+20%</span></li>
+                <li>Critical Chance: <span class="stat-val">+3%</span></li>
+            </ul>
+        </div>
+
+        <div class="card red">
+            <div class="name">Peppermint Antennas</div>
+            <ul class="stats-list">
+                <li>Flame Pollen: <span class="stat-val">+20%</span></li>
+                <li>Bee Ability Rate: <span class="stat-val">+5%</span></li>
+                <li>Red Pollen: <span class="stat-val">+10%</span></li>
+            </ul>
+        </div>
+
+        <div class="card red">
+            <div class="name">Toy Drum</div>
+            <ul class="stats-list">
+                <li>Haste Token: <span class="stat-val">+Yes</span></li>
+                <li>Attack: <span class="stat-val">+1</span></li>
+                <li>Bee Ability Rate: <span class="stat-val">+3%</span></li>
+            </ul>
+            <div class="note">Nejlepší na Rage / Spicy včely.</div>
+        </div>
+
+        <div class="card red">
+            <div class="name">Rose Headband</div>
+            <ul class="stats-list">
+                <li>Red Pollen: <span class="stat-val">+12%</span></li>
+                <li>Gather Amount: <span class="stat-val">+10%</span></li>
+                <li>Rose Field Pollen: <span class="stat-val">+15%</span></li>
+            </ul>
+        </div>
+
+        <div class="card white">
+            <div class="name">Toy Horn</div>
+            <ul class="stats-list">
+                <li>Ability: <span class="stat-val">Melody Token</span></li>
+                <li>Critical Power: <span class="stat-val">+10%</span></li>
+                <li>Gather Amount: <span class="stat-val">+15%</span></li>
+            </ul>
+            <div class="note">Základ pro každou Music Bee.</div>
+        </div>
+
+        <div class="card white">
+            <div class="name">Paper Angel</div>
+            <ul class="stats-list">
+                <li>Ability: <span class="stat-val">Token Link</span></li>
+                <li>White Pollen: <span class="stat-val">+15%</span></li>
+                <li>Convert Rate: <span class="stat-val">+10%</span></li>
+            </ul>
+        </div>
+
+        <div class="card white">
+            <div class="name">Camo Bandana</div>
+            <ul class="stats-list">
+                <li>Attack: <span class="stat-val">+2</span></li>
+                <li>Defense: <span class="stat-val">+10%</span></li>
+                <li>White Pollen: <span class="stat-val">+5%</span></li>
+            </ul>
+        </div>
+
+        <div class="card white">
+            <div class="name">Smiley Sticker</div>
+            <ul class="stats-list">
+                <li>Critical Chance: <span class="stat-val">+5%</span></li>
+                <li>Pollen: <span class="stat-val">+5%</span></li>
+                <li>Honey Per Pollen: <span class="stat-val">+2%</span></li>
+            </ul>
+        </div>
+
+        <div class="card white">
+            <div class="name">Puppy Antlers</div>
+            <ul class="stats-list">
+                <li>Fetch Bonus: <span class="stat-val">+100%</span></li>
+                <li>Bond From Treats: <span class="stat-val">+10%</span></li>
+                <li>Capacity: <span class="stat-val">+5%</span></li>
+            </ul>
+            <div class="note">Pouze pro Puppy Bee.</div>
+        </div>
+
+        <div class="card white">
+            <div class="name">Festive Wreath</div>
+            <ul class="stats-list">
+                <li>Festive Gift Plus: <span class="stat-val">+Yes</span></li>
+                <li>Honey At Hive: <span class="stat-val">+15%</span></li>
+                <li>Red/Blue Pollen: <span class="stat-val">+10%</span></li>
+            </ul>
+            <div class="note">Pouze pro Festive Bee.</div>
+        </div>
+
+        <div class="card white">
+            <div class="name">Whistle</div>
+            <ul class="stats-list">
+                <li>Bee Move Speed: <span class="stat-val">+15</span></li>
+                <li>Gather Amount: <span class="stat-val">+10%</span></li>
+                <li>Energy: <span class="stat-val">+5</span></li>
+            </ul>
+        </div>
+
+        <div class="card white">
+            <div class="name">Elf Cap</div>
+            <ul class="stats-list">
+                <li>Convert Rate: <span class="stat-val">+15%</span></li>
+                <li>Capacity: <span class="stat-val">+5%</span></li>
+                <li>Bee Ability Rate: <span class="stat-val">+3%</span></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+        function filter(color) {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                if (color === 'all') {
+                    card.style.display = 'flex';
+                } else {
+                    card.classList.contains(color) ? card.style.display = 'flex' : card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
